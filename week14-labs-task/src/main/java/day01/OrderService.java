@@ -21,7 +21,7 @@ public class OrderService {
 
     public List<Order> getOrdersBetweenDates(LocalDate firstDate, LocalDate secondDate) {
         if (secondDate.isAfter(firstDate)) {
-           return orders.stream()
+            return orders.stream()
                     .filter(order -> order.getOrderDate().isAfter(firstDate) && order.getOrderDate().isBefore(secondDate))
                     .toList();
         } else if (firstDate.isAfter(secondDate)) {
@@ -41,5 +41,12 @@ public class OrderService {
     public Order getOrderWithMostProduct() {
         return orders.stream().
                 max(Comparator.comparingInt(order -> order.getProducts().size())).orElseThrow(() -> new IllegalArgumentException("No orders"));
+    }
+
+    public List<Order> getOrdersWithCategory(String category) {
+        return orders.stream()
+                .filter(order -> order.getProducts()
+                        .stream().anyMatch(product -> product.getCategory().equals(category)))
+                .toList();
     }
 }

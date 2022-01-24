@@ -41,12 +41,11 @@ class OrderServiceTest {
         o4.addProduct(p3);
         o4.addProduct(p1);
         o4.addProduct(p2);
+        o4.addProduct(p4);
 
         Order o5 = new Order("pending", LocalDate.of(2021, 06, 07));
         o5.addProduct(p1);
         o5.addProduct(p2);
-        o5.addProduct(p5);
-        o5.addProduct(p4);
 
         orderService.saveOrder(o1);
         orderService.saveOrder(o2);
@@ -56,7 +55,7 @@ class OrderServiceTest {
     }
 
     @Test
-    void getNumberOfOrdersByStatusTest() {
+    void countOrdersByStatusTest() {
         assertEquals(3, orderService.countOrdersByStatus("pending"));
         assertEquals(2, orderService.countOrdersByStatus("on delivery"));
         assertEquals(0, orderService.countOrdersByStatus(""));
@@ -64,7 +63,7 @@ class OrderServiceTest {
 
     @Test
     void getOrdersBetweenDatesTest() {
-        List<Order> result = orderService.getOrdersBetweenDates(LocalDate.of(2021,5,31), LocalDate.of(2021,06,02));
+        List<Order> result = orderService.getOrdersBetweenDates(LocalDate.of(2021, 5, 31), LocalDate.of(2021, 06, 02));
         assertEquals(2, result.size());
     }
 
@@ -78,5 +77,11 @@ class OrderServiceTest {
     void getOrderWithMostProductTest() {
         Order result = orderService.getOrderWithMostProduct();
         assertEquals(4, result.getProducts().size());
+    }
+
+    @Test
+    void getOrdersWithCategoryTest() {
+        assertEquals(5, orderService.getOrdersWithCategory("IT").size());
+        assertEquals(3, orderService.getOrdersWithCategory("Book").size());
     }
 }
