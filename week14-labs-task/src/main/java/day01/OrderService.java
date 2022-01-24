@@ -2,8 +2,8 @@ package day01;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OrderService {
 
@@ -33,7 +33,13 @@ public class OrderService {
         }
     }
 
-    public boolean isLessProductThan(int numberOfProducts) {
-        return orders.stream().anyMatch(order -> order.getProducts().size() < numberOfProducts);
+    public boolean isOrderWithLessProductThan(int numberOfProducts) {
+        return orders.stream()
+                .anyMatch(order -> order.getProducts().size() < numberOfProducts);
+    }
+
+    public Order getOrderWithMostProduct() {
+        return orders.stream().
+                max(Comparator.comparingInt(order -> orders.size())).orElseThrow(() -> new IllegalArgumentException("No orders"));
     }
 }

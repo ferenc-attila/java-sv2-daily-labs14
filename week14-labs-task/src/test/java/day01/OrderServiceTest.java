@@ -68,8 +68,8 @@ class OrderServiceTest {
     }
 
     @Test
-    void lessProductsThanTest() {
-        assertTrue(orderService.isLessProductThan(4));
-        assertFalse(orderService.isLessProductThan(2));
+    void isOrderWithLessProductsThanTest() {
+        assertTrue(orderService.isOrderWithLessProductThan(4));
+        assertFalse(orderService.isOrderWithLessProductThan(2));
     }
 }
