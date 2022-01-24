@@ -34,9 +34,6 @@ public class OrderService {
     }
 
     public boolean isLessProductThan(int numberOfProducts) {
-        return orders.stream()
-                .filter(order -> order.getProducts().size() < numberOfProducts)
-                .count() > 0L;
-
+        return orders.stream().anyMatch(order -> order.getProducts().size() < numberOfProducts);
     }
 }
