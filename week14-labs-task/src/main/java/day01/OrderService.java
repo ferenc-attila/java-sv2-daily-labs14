@@ -40,6 +40,6 @@ public class OrderService {
 
     public Order getOrderWithMostProduct() {
         return orders.stream().
-                max(Comparator.comparingInt(order -> orders.size())).orElseThrow(() -> new IllegalArgumentException("No orders"));
+                max(Comparator.comparingInt(order -> order.getProducts().size())).orElseThrow(() -> new IllegalArgumentException("No orders"));
     }
 }

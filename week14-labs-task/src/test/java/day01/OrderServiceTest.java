@@ -46,6 +46,7 @@ class OrderServiceTest {
         o5.addProduct(p1);
         o5.addProduct(p2);
         o5.addProduct(p5);
+        o5.addProduct(p4);
 
         orderService.saveOrder(o1);
         orderService.saveOrder(o2);
@@ -71,5 +72,11 @@ class OrderServiceTest {
     void isOrderWithLessProductsThanTest() {
         assertTrue(orderService.isOrderWithLessProductThan(4));
         assertFalse(orderService.isOrderWithLessProductThan(2));
+    }
+
+    @Test
+    void getOrderWithMostProductTest() {
+        Order result = orderService.getOrderWithMostProduct();
+        assertEquals(4, result.getProducts().size());
     }
 }
