@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -55,6 +56,14 @@ class OrderServiceTest {
 
     @Test
     void getNumberOfOrdersByStatusTest() {
-        assertEquals(3, orderService.getNumberOfOrdersByStatus("pending"));
+        assertEquals(3, orderService.countOrdersByStatus("pending"));
+        assertEquals(2, orderService.countOrdersByStatus("on delivery"));
+        assertEquals(0, orderService.countOrdersByStatus(""));
+    }
+
+    @Test
+    void getOrdersBetweenDatesTest() {
+        List<Order> result = orderService.getOrdersBetweenDates(LocalDate.of(2021,5,31), LocalDate.of(2021,06,02));
+        assertEquals(2, result.size());
     }
 }
