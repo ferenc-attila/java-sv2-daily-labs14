@@ -66,4 +66,10 @@ class OrderServiceTest {
         List<Order> result = orderService.getOrdersBetweenDates(LocalDate.of(2021,5,31), LocalDate.of(2021,06,02));
         assertEquals(2, result.size());
     }
+
+    @Test
+    void lessProductsThanTest() {
+        assertTrue(orderService.isLessProductThan(4));
+        assertFalse(orderService.isLessProductThan(2));
+    }
 }
