@@ -49,4 +49,12 @@ public class OrderService {
                         .stream().anyMatch(product -> product.getCategory().equals(category)))
                 .toList();
     }
+
+    public List<Product> findProductsOverPrice(int amount) {
+        return orders.stream()
+                .flatMap(o -> o.getProducts().stream())
+                .filter(p -> p.getPrice() > amount)
+                .distinct()
+                .toList();
+    }
 }
